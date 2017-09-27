@@ -1,0 +1,13 @@
+# home config
+
+# host
+HOST = '192.168.31.163'
+PORT = 5053
+DEBUG = True
+
+# database
+SQLALCHEMY_ECHO = True
+SQLALCHEMY_DATABASE_URI = 'mysql://voson:voson@2017@192.168.31.163/test'
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+SECRET_KEY = 'gl$!9ZO2TwDHRiGDG5xK'
