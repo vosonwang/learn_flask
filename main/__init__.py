@@ -1,5 +1,7 @@
 # coding=utf-8
 from flask import Flask, g
+import logging
+from logging.handlers import TimedRotatingFileHandler
 
 # def create_app():
 
@@ -32,10 +34,25 @@ def teardown_request(exception):
     g.session.close()
 
 
+# 可能是由于要现有app，才能有routes这些，所以from import 放在了这里
 # 路由
 from .routes import *
-# 模型
-from models import db
 
-# 创建表
-# db.create_all()
+# 模型
+from .models import db, init_db
+
+# 初始化数据库
+# init_db()
+
+# 记录日志
+# 每间隔1D（天）滚动存档成一个日志，设置启用本地时间，而不是utc时间
+handler = TimedRotatingFileHandler('learn_flask.log', when='D', interval=1, backupCount=0, encoding=None, delay=False,
+                                   utc=False)
+handler.setFormatter(logging.Formatter(
+    '%(asctime)s  %(levelname)s  %(message)s  %(pathname)s  line %(lineno)d',
+    # 设置显示时间的格式
+    datefmt='%Y-%m-%d %H:%M:%S'
+))
+# 设置记录日志的等级，INFO 则 所有的日志记录都记录
+handler.setLevel(logging.INFO)
+app.logger.addHandler(handler)
