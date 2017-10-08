@@ -1,7 +1,11 @@
 # coding=utf-8
-from flask import Flask, g
 import logging
+import uuid
 from logging.handlers import TimedRotatingFileHandler
+
+from flask import Flask, g
+
+from main.aliyun_sms.send_sms import send_sms
 
 # def create_app():
 
@@ -56,3 +60,8 @@ handler.setFormatter(logging.Formatter(
 # 设置记录日志的等级，INFO 则 所有的日志记录都记录
 handler.setLevel(logging.INFO)
 app.logger.addHandler(handler)
+
+# send_sms(uuid.uuid1(), "13205173164", "松网", "SMS_101220014", "{\"code\":\"7894\"}")
+
+# 如果Debug开启会被打印两遍
+# print 3
