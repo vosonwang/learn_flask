@@ -17,7 +17,7 @@ def __save_note():
                 return json_package('success', save_note(d))
             else:
                 "更新全部或部分内容"
-                return json_package('success', update_note(d['short_id'], d['text']))
+                return json_package('success', update_note(d['short_id'], d['text'], d['render']))
 
     except Exception, e:
         app.logger.error('%s %s %s ' + e.message, request.remote_addr, request.method,
@@ -45,6 +45,7 @@ def __find_note(short_id):
 def __all_notes():
     """获取所有笔记"""
     return json_package('success', all_notes())
+
 
 @app.route('/notes/<short_id>', methods=['DELETE'])
 def __delete_note(short_id):

@@ -22,7 +22,7 @@ def find_note(short_id):
     c = Note.query.filter_by(short_id=short_id).first()
     if c is not None:
         return {'id': c.id,
-                'text': c.text,
+                'text': c.text, 'render': c.render,
                 'short_id': c.short_id,
                 'create_time': c.create_time,
                 'update_time': c.update_time}
@@ -32,7 +32,7 @@ def save_note(a):
     """新建笔记"""
     c = Note(short_id=a['short_id'], text=a['text']).save()
     return {'id': c.id,
-            'text': c.text,
+            'text': c.text, 'render': c.render,
             'short_id': c.short_id,
             'create_time': c.create_time,
             'update_time': c.update_time}
@@ -41,29 +41,31 @@ def save_note(a):
 def all_notes():
     a = []
     for c in Note.query.all():
-        b = {'id': c.id, 'text': c.text, 'short_id': c.short_id, 'create_time': c.create_time,
+        b = {'id': c.id, 'text': c.text, 'render': c.render, 'short_id': c.short_id, 'create_time': c.create_time,
              'update_time': c.update_time}
         a.append(b)
 
     return a
 
 
-def update_note(short_id, text):
+def update_note(short_id, text, render):
     """更新笔记"""
     a = Note.query.filter_by(short_id=short_id).first()
     if not a:
-        c = Note(short_id=short_id, text=text).save()
+        c = Note(short_id=short_id, text=text, render=render).save()
         return {'id': c.id,
                 'text': c.text,
+                'render': c.render,
                 'short_id': c.short_id,
                 'create_time': c.create_time,
                 'update_time': c.update_time}
     else:
         a.short_id = short_id
         a.text = text
+        a.render = render
         c = a.update()
         return {'id': c.id,
-                'text': c.text,
+                'text': c.text, 'render': c.render,
                 'short_id': c.short_id,
                 'create_time': c.create_time,
                 'update_time': c.update_time}
