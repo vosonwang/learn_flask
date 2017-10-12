@@ -41,7 +41,8 @@ def save_note(a):
 def all_notes():
     a = []
     for c in Note.query.all():
-        b = {'id': c.id, 'text': c.text, 'render': c.render, 'short_id': c.short_id, 'create_time': c.create_time,
+        # 直接传html内容的render 不传text
+        b = {'id': c.id, 'render': c.render, 'short_id': c.short_id, 'create_time': c.create_time,
              'update_time': c.update_time}
         a.append(b)
 

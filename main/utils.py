@@ -6,3 +6,4 @@ def json_package(a, b):
     """将结果转成json"""
     return json.dumps({'status': a, 'result': b}, ensure_ascii=False)
 
+# TODO 生成short_id
