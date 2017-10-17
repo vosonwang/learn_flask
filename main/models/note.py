@@ -17,13 +17,11 @@ class Note(db.Model):
     id = db.Column(db.String(32), default=generate_id, primary_key=True, doc='uuid')
     short_id = db.Column(db.SmallInteger, unique=True, nullable=True, doc='短编号')
     text = db.Column(db.String(10000), nullable=True, doc='笔记')
-    render = db.Column(db.String(50000), nullable=True, doc='html')
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, doc='创建时间（UTC）')
     update_time = db.Column(db.DateTime, onupdate=datetime.utcnow, doc='更新时间（UTC）')
 
-    def __init__(self, text=text, render=render, short_id=None, create_time=None, update_time=None):
+    def __init__(self, text=text, short_id=None, create_time=None, update_time=None):
         self.text = text
-        self.render = render
         self.short_id = short_id
         self.create_time = create_time
         self.update_time = update_time

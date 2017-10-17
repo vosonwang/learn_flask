@@ -17,7 +17,7 @@ def __save_note():
                 return json_package('success', save_note(d))
             else:
                 "更新全部或部分内容"
-                return json_package('success', update_note(d['short_id'], d['text'], d['render']))
+                return json_package('success', update_note(d['short_id'], d['text']))
 
     except Exception, e:
         app.logger.error('%s %s %s ' + e.message, request.remote_addr, request.method,
@@ -29,7 +29,7 @@ def __save_note():
 
 @app.route('/notes/<short_id>', methods=['GET'])
 def __find_note(short_id):
-    """根据short_id查找笔记"""
+    """根据short_id查找笔记内容"""
     try:
         if re.match(r'\d{1,4}$', short_id) is not None and find_note(short_id) is not None:
             return json_package('success', find_note(short_id))
@@ -41,10 +41,10 @@ def __find_note(short_id):
         return json_package('warning', '查无此记录')
 
 
-@app.route('/notes', methods=['GET'])
+@app.route('/profiles', methods=['GET'])
 def __all_notes():
-    """获取所有笔记"""
-    return json_package('success', all_notes())
+    """获取所有笔记简介"""
+    return json_package('success', all_profiles())
 
 
 @app.route('/notes/<short_id>', methods=['DELETE'])
@@ -78,6 +78,11 @@ def ___delete_notes():
         app.logger.error('%s %s %s ' + e.message, request.remote_addr, request.method,
                          request.base_url.encode('unicode-escape'))
         return json_package('error', e.message)
+
+
+@app.route('/shortId', methods=['GET'])
+def __get_short_id():
+    return json_package('success', generate_short_id())
 
 
 @app.errorhandler(404)
