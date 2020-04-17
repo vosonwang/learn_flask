@@ -3,8 +3,8 @@ from aliyunsdkcore.client import AcsClient
 
 REGION = "cn-hangzhou"  # 暂时不支持多region
 # ACCESS_KEY_ID/ACCESS_KEY_SECRET 根据实际申请的账号信息进行替换
-ACCESS_KEY_ID = "LTAIen6pHBzA6epF"
-ACCESS_KEY_SECRET = "G3pNlzq5m7z1aPnkTsk5dIiCBq8ODq"
+ACCESS_KEY_ID = ""
+ACCESS_KEY_SECRET = ""
 acs_client = AcsClient(ACCESS_KEY_ID, ACCESS_KEY_SECRET, REGION)
 
 # 需要接收的消息类型。短信回执：SmsReport，短息上行：SmsUp，语音呼叫：VoiceReport，流量直冲：FlowReport
